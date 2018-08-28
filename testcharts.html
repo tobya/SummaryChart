@@ -1,0 +1,101 @@
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+      
+
+      <script type="text/javascript">
+        
+
+google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawAxisTickColors);
+
+function drawAxisTickColors() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'SomeDay');
+      data.addColumn('number', 'Poor');
+      data.addColumn('number', 'Fair');
+      data.addColumn('number', 'Good');
+      data.addColumn('number', 'Excellent');
+
+      data.addRows([
+        ['', 1,6, 10,8],
+
+
+      ]);
+
+      var options = {
+        title: 'Teacher Feedback Pam',
+        focusTarget: 'category',
+        chartArea: {width: '50%'},
+        colors: ['#e0440e', '#ff4433', '#ff55aa', '#eeeeaa', '#f6c7b6'],
+        hAxis: {
+          title: 'Feedback Selection',
+          
+          viewWindow: {
+            min: [7, 30, 0],
+            max: [17, 30, 0]
+          },
+          textStyle: {
+            fontSize: 14,
+            color: '#053061',
+            bold: true,
+            italic: false
+          },
+          titleTextStyle: {
+            fontSize: 18,
+            color: '#053061',
+            bold: true,
+            italic: false
+          }
+        },
+        vAxis: {
+          title: 'Number of Responses',
+          textStyle: {
+            fontSize: 18,
+            color: '#67001f',
+            bold: false,
+            italic: false
+          },
+          titleTextStyle: {
+            fontSize: 18,
+            color: '#67001f',
+            bold: true,
+            italic: false
+          }
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+
+      var chart2 = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+      chart2.draw(data, options);
+
+            var chart3 = new google.visualization.ColumnChart(document.getElementById('chart_div3'));
+      chart3.draw(data, options);
+    
+
+            var chart4 = new google.visualization.ColumnChart(document.getElementById('chart_div4'));
+      chart4.draw(data, options);
+    
+
+            var chart5 = new google.visualization.ColumnChart(document.getElementById('chart_div5'));
+      chart5.draw(data, options);
+    
+
+            var chart6 = new google.visualization.ColumnChart(document.getElementById('chart_div6'));
+      chart6.draw(data, options);
+    
+
+
+    }
+
+      </script>
+
+
+        <div id="chart_div"></div>
+          <div id="chart_div2"></div>
+            <div id="chart_div3"></div>
+              <div id="chart_div4"></div>
+                <div id="chart_div5"></div>
+                  <div id="chart_div6"></div>
+                    <div id="chart_div7"></div>

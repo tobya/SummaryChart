@@ -1,3 +1,5 @@
 *.json
 *.dat
 *.txt
+config.json.php
+pprint_r.php

@@ -3,7 +3,8 @@ include "pprint_r.php";
 include "load_functions.php";
 // Load Google Forms Spreadsheet info
 $GS_KEY = $_GET['KEY'];
-
+$FeedbackField = $_GET['feedbackfield'];
+$ChartTitle = @$_GET['Title'];
 $Data = getSpreadSheetasArray($GS_KEY);
 //preprint_r($Header);
 $HeaderList = GetFieldInfo($Data['Header']);
@@ -15,6 +16,10 @@ $FeedBackTotals = getMultiSelectTotals($Data['Fields'], $HeaderList );
  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
       
+   <style type="text/css">
+ P.pagebreak { page-break-before: always; } /* page-break-after works, as well */
+
+</style>     
 
       <script type="text/javascript">
         
@@ -36,8 +41,10 @@ var data = [] ;
         'Good' => 4,
         'Excellent' => 5
     ];
-      foreach ($FeedBackTotals['Teacher Feedback '] as $Person => $Details) {
+      $BaseScores = array(0,0,0,0,0,0);
+      foreach ($FeedBackTotals[$FeedbackField] as $Person => $Details) {
         # code...
+        $Scores = $BaseScores;
         foreach ($Details as $key => $value) {
           # code...
           $Scores[$Keys[$key]] = $value;
@@ -73,14 +80,14 @@ var data = [] ;
         chartArea: {width: '30%'},
         
         hAxis: {
-          title: 'Feedback Selection',
+          title: 'Feedback Selection <?php echo $ChartTitle; ?>',
           
           viewWindow: {
             min: [7, 30, 0],
             max: [17, 30, 0]
           },
           textStyle: {
-            fontSize: 14,
+            fontSize: 22,
             color: '#053061',
             bold: true,
             italic: false
@@ -112,7 +119,7 @@ var data = [] ;
       $j = 0;
       foreach ($DataRows as $key => $value) {
         echo "      
-        options['title'] = 'Teacher Feedback - $key';
+        options['title'] = '$FeedbackField - $key';
         var chart$j = new google.visualization.ColumnChart(document.getElementById('chart_div$j'));
       chart$j.draw(data[$j], options);";
       $j++;
@@ -129,9 +136,13 @@ var data = [] ;
       <?php
       $k = 0;
       foreach ($DataRows as $key => $value) {
-        echo "       <div id='chart_div$k'></div>\n<BR>";
+        echo "    
+        <table width=100%><tr><td>
+           <div id='chart_div$k'></div>\n
+           </td></tr></table><BR><P class='pagebreak'>
+      ";
+
       $k++;
       }
       ?>
        
-        

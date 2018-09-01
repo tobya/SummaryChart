@@ -24,13 +24,13 @@ foreach ($CSVSpreadsheetLines as $key => $Line) {
   if ($IsHeader){
     foreach ($CSVFields as $key => $value) {
       # code...
-    $Header[trim($value)] = array('fieldname' =>  trim($value));
-    $HeaderList[] = trim($value);
+    $Header[($value)] = array('fieldname' =>  ($value));
+    $HeaderList[] = ($value);
     }
   } else {
     foreach ($CSVFields as $key => $value) {
       # code...
-      $Data[$i][$HeaderList[$key]] = trim($value);
+      $Data[$i][$HeaderList[$key]] = ($value);
     }
   }
 
@@ -46,15 +46,12 @@ function getMultiSelectTotals($Rows, $FieldInfo){
   foreach ($Rows as $key => $Row) {
     # code...
     foreach ($Row as $ColName => $ColValue) {
-      # code...
-   // echo $ColName;
-   // echo "<BR>";
-   // echo $ColValue;
+
     if ($ColValue == '') {continue;}
-   // print_r($FieldInfo[$ColName]);
-   // exit;
-     // echo '$FieldInfo[$ColName][\'MultiSelectOption\']' . " " . $FieldInfo[$ColName]['MultiSelectOption'] . "<BR>";
-    //  echo '$SelectTotals[$FieldInfo[$ColName][\'MultiSelect\']][$FieldInfo[$ColName][\'MultiSelectOption\']]' . " " . $SelectTotals[$FieldInfo[$ColName]['MultiSelect']][$FieldInfo[$ColName]['MultiSelectOption']] . "<BR>";
+    if ($FieldInfo[$ColName]['MultiSelect'] == ''){continue;}
+ 
+
+
    
     if (isset($SelectTotals[$FieldInfo[$ColName]['MultiSelect']][$FieldInfo[$ColName]['MultiSelectOption']][$ColValue])) {
         $SelectTotals[$FieldInfo[$ColName]['MultiSelect']][$FieldInfo[$ColName]['MultiSelectOption']][$ColValue]++;// = $SelectTotals[$FieldInfo[$ColName]['MultiSelect']][$FieldInfo[$ColName]['MultiSelectOption']] +1;

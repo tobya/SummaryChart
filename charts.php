@@ -6,9 +6,12 @@ $GS_KEY = $_GET['KEY'];
 $FeedbackField = $_GET['feedbackfield'];
 $ChartTitle = @$_GET['Title'];
 $Data = getSpreadSheetasArray($GS_KEY);
+//pprint_r($Data);
 //preprint_r($Header);
+//preprint_r($Data);
 $HeaderList = GetFieldInfo($Data['Header']);
 //preprint_r($HeaderList );
+//exit();
 $FeedBackTotals = getMultiSelectTotals($Data['Fields'], $HeaderList );
 //preprint_r($FeedBackTotals);
 ?>
@@ -41,6 +44,7 @@ var data = [] ;
         'Good' => 4,
         'Excellent' => 5
     ];
+
       $BaseScores = array(0,0,0,0,0,0);
       foreach ($FeedBackTotals[$FeedbackField] as $Person => $Details) {
         # code...
@@ -77,7 +81,9 @@ var data = [] ;
       var options = {
         title: 'Teacher Feedback',
         focusTarget: 'category',
-        chartArea: {width: '30%'},
+        chartArea: {width: '50%'},
+        'width':900,
+        'height':300,
         
         hAxis: {
           title: 'Feedback Selection <?php echo $ChartTitle; ?>',

@@ -9,7 +9,7 @@ function getSpreadSheetasArray($KEY){
   } else {
 
   $CSVSpreadsheet = file_get_contents("https://docs.google.com/spreadsheets/d/$KEY/export?format=csv");
-  file_put_contents($KEY . '.txt', $CSVSpreadsheet);
+  //file_put_contents($KEY . '.txt', $CSVSpreadsheet);
   }
 
   $CSVSpreadsheetLines = explode("\n", $CSVSpreadsheet);

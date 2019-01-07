@@ -3,13 +3,11 @@
 
 function getSpreadSheetasArray($KEY){
 
-
   if (file_exists($KEY . '.txt')){
-  $CSVSpreadsheet = file_get_contents($KEY . '.txt');
+    $CSVSpreadsheet = file_get_contents($KEY . '.txt');
   } else {
-
-  $CSVSpreadsheet = file_get_contents("https://docs.google.com/spreadsheets/d/$KEY/export?format=csv");
-  //file_put_contents($KEY . '.txt', $CSVSpreadsheet);
+    $CSVSpreadsheet = file_get_contents("https://docs.google.com/spreadsheets/d/$KEY/export?format=csv");
+    //file_put_contents($KEY . '.txt', $CSVSpreadsheet);
   }
 
   $CSVSpreadsheetLines = explode("\n", $CSVSpreadsheet);
@@ -17,19 +15,17 @@ function getSpreadSheetasArray($KEY){
   $IsHeader = true;
       $i = 0;
   foreach ($CSVSpreadsheetLines as $key => $Line) {
-    # code...
 
     $CSVFields = str_getcsv($Line);
 
     if ($IsHeader){
       foreach ($CSVFields as $key => $value) {
-        # code...
-      $Header[($value)] = array('fieldname' =>  ($value));
-      $HeaderList[] = ($value);
+        $Header[($value)] = array('fieldname' =>  ($value));
+        $HeaderList[] = ($value);
       }
     } else {
       foreach ($CSVFields as $key => $value) {
-        # code...
+
         $Data[$i][$HeaderList[$key]] = ($value);
         $Values[$HeaderList[$key]][$value] = $value;
       }
@@ -46,28 +42,26 @@ function getSpreadSheetasArray($KEY){
 function getMultiSelectTotals($Rows, $AllFieldInfo){
   $FieldInfo = $AllFieldInfo['allfields'];
   foreach ($Rows as $key => $Row) {
-    # code...
+
     foreach ($Row as $ColName => $ColValue) {
 
-    if ($ColValue == '') {continue;}
-    if ($FieldInfo[$ColName]['MultiSelect'] == ''){continue;}
- 
-
-
+      // Check Data, or continue.
+      if ($ColValue == '') {continue;}
+      if ($FieldInfo[$ColName]['MultiSelect'] == ''){continue;}
    
-    if (isset($SelectTotals[$FieldInfo[$ColName]['MultiSelect']][$FieldInfo[$ColName]['MultiSelectOption']][$ColValue])) {
-        $SelectTotals[$FieldInfo[$ColName]['MultiSelect']][$FieldInfo[$ColName]['MultiSelectOption']][$ColValue]++;// = $SelectTotals[$FieldInfo[$ColName]['MultiSelect']][$FieldInfo[$ColName]['MultiSelectOption']] +1;
-    } else {
-        $SelectTotals[$FieldInfo[$ColName]['MultiSelect']][$FieldInfo[$ColName]['MultiSelectOption']][$ColValue] = 1;
+      if (isset($SelectTotals[$FieldInfo[$ColName]['MultiSelect']][$FieldInfo[$ColName]['MultiSelectOption']][$ColValue])) {
+          $SelectTotals[$FieldInfo[$ColName]['MultiSelect']][$FieldInfo[$ColName]['MultiSelectOption']][$ColValue]++;
+      } else {  // First addition.
+          $SelectTotals[$FieldInfo[$ColName]['MultiSelect']][$FieldInfo[$ColName]['MultiSelectOption']][$ColValue] = 1;
+      }
     }
-  }
   }
   return $SelectTotals;
 }
 
 function GetFieldInfo($HeaderFields){
   foreach ($HeaderFields as $key => $Field) {
-    # code...
+    
     // # (.*?) \[(.*?)\]
     if (preg_match('/(.*?) \[(.*?)\]/', $Field['fieldname'], $regs)) {
       $MultiSelectField = $regs[1];

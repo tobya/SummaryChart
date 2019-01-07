@@ -24,7 +24,7 @@ foreach ($FeedbackScores as $MultiSelect => $value) {
 }
 
 function ExtractKey($KEY){
-  //Check if url sharing url
+  //Check if sharing url
   //https://docs.google.com/spreadsheets/d/1yk-nGxD5kUeA_3vNCBJlX0yeEl7_edSABX-kEMyC3SA/edit?usp=sharing
 
   if (stripos($KEY,'https') !== false){

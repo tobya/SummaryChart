@@ -4,8 +4,11 @@
 include "load_functions.php";
 // Load Google Forms Spreadsheet info
 $KEY = $_GET['KEY'];
-$Title = $_GET['Title'];
-$GS_KEY = extractKey($KEY);
+
+$GS_KEY = urltokey($KEY);
+
+// sanitise title so no script.
+$Title = htmlspecialchars( $_GET['Title']);
 
 $Data = getSpreadSheetasArray($GS_KEY);
 //preprint_r($Header);
@@ -14,26 +17,23 @@ $HeaderList = GetFieldInfo($Data['Header']);
 $FeedbackScores = getMultiSelectTotals($Data['Fields'], $HeaderList );
 //preprint_r($Data);
 
+// If not Grids found
+if ($FeedbackScores == []){
+  echo "Unable to  find any MultiSelect Results in Spreadsheet.  Try another spreadsheet.";
+  die();
+}
+
+echo "
+<h2>$Title</h2>
+<ul>";
 foreach ($FeedbackScores as $MultiSelect => $value) {
   # code...
-  $MultiSelect = urlencode($MultiSelect);
- echo "<a href='charts.php?KEY=$GS_KEY&feedbackfield=$MultiSelect&Title=$Title'>$MultiSelect</a><br>";
+  $MultiSelectURL = urlencode($MultiSelect);
+
+ echo "<li><a href='charts.php?KEY=$GS_KEY&feedbackfield=$MultiSelectURL&Title=$Title'>$MultiSelect</a><br>";
 
 
 
 }
 
-function ExtractKey($KEY){
-  //Check if sharing url
-  //https://docs.google.com/spreadsheets/d/1yk-nGxD5kUeA_3vNCBJlX0yeEl7_edSABX-kEMyC3SA/edit?usp=sharing
 
-  if (stripos($KEY,'https') !== false){
-    $GS_KEY = str_replace('https://docs.google.com/spreadsheets/d/', '', $KEY);
-    $index = strpos($GS_KEY,'/' );
-    $GS_KEY = substr($GS_KEY, 0,$index);
-  }
-  else {
-    $GS_KEY = $KEY;
-  }
-  return $GS_KEY;
-}

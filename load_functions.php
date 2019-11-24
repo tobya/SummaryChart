@@ -1,6 +1,9 @@
 <?php
 
 
+
+
+
 function getSpreadSheetasArray($KEY){
 
   if (file_exists($KEY . '.txt')){
@@ -41,6 +44,7 @@ function getSpreadSheetasArray($KEY){
 
 function getMultiSelectTotals($Rows, $AllFieldInfo){
   $FieldInfo = $AllFieldInfo['allfields'];
+  $SelectTotals = [];
   foreach ($Rows as $key => $Row) {
 
     foreach ($Row as $ColName => $ColValue) {
@@ -80,4 +84,24 @@ function GetFieldInfo($HeaderFields){
   }
 
   return ['allfields' => $HeaderFields, 'options' => $Options];
+}
+
+
+function URLtoKey($URL){
+  //https://docs.google.com/spreadsheets/d/1SJoeJ-tNY_Kw3xxxxxxxxxxxxSdtzFybRHY/edit?usp=sharing
+
+  $ulrparts = parse_url($URL);
+
+  $paths = explode('/', $ulrparts['path']);
+
+  // if passed in value is not a url, but actually the key, then urlparts will path = key so cant be split.
+  if (count($paths) > 1){
+    $key = $paths[3];
+  } else {
+    $key = $URL;
+  }
+
+  return $key;
+
+
 }

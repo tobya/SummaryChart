@@ -2,7 +2,10 @@
 //include "pprint_r.php";
 include "load_functions.php";
 // Load Google Forms Spreadsheet info
+
+
 $GS_KEY = $_GET['KEY'];
+
 $FeedbackField = $_GET['feedbackfield'];
 $ChartTitle = @$_GET['Title'];
 $Data = getSpreadSheetasArray($GS_KEY);

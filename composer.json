@@ -1,0 +1,14 @@
+{
+    "name": "tobya/summarychart",
+    "description": "Allows you to view chart from Google Forms Data",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Toby Allen",
+            "email": "toby@toflidium.com"
+        }
+    ],
+    "require": {}
+   
+}

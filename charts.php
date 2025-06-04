@@ -39,7 +39,7 @@ function drawAxisTickColors() {
 var data = [] ;
 
 
-      <?php 
+      <?php
       $Keys = [
         'Poor' => 1,
         'Fair' => 2,
@@ -111,6 +111,16 @@ var data = [] ;
         },
         vAxis: {
           title: 'Number of Responses',
+
+            <?php
+
+            $maxValue = $_GET['vaxis-maxvalue'] ?? 0 ;
+
+            if ($maxValue > 0){
+            echo "\n        maxValue : $maxValue  ,";
+            }
+
+            ?>
           textStyle: {
             fontSize: 18,
             color: '#67001f',

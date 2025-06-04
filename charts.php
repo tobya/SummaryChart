@@ -114,7 +114,7 @@ var data = [] ;
 
             <?php
 
-            $maxValue = $_GET['vaxis-maxvalue'] ?? 0 ;
+            $maxValue = $_GET['vaxismaxvalue'] ?? 0 ;
 
             if ($maxValue > 0){
             echo "\n        maxValue : $maxValue  ,";

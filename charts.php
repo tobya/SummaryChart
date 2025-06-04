@@ -21,14 +21,14 @@ $FeedBackTotals = getMultiSelectTotals($Data['Fields'], $HeaderList );
 
  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-      
+
    <style type="text/css">
  P.pagebreak { page-break-before: always; } /* page-break-after works, as well */
 
-</style>     
+</style>
 
       <script type="text/javascript">
-        
+
 
 google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawAxisTickColors);
@@ -61,7 +61,7 @@ var data = [] ;
       $i = 0;
       foreach ($DataRows as $key => $value) {
         # code...
-        
+
         echo "       data[$i] = new google.visualization.DataTable();
       data[$i].addColumn('string', 'SomeDay');
       data[$i].addColumn('number', 'Poor');
@@ -84,13 +84,14 @@ var data = [] ;
       var options = {
         title: 'Teacher Feedback',
         focusTarget: 'category',
+
         chartArea: {width: '50%'},
         'width':900,
         'height':300,
-        
+
         hAxis: {
           title: 'Feedback Selection <?php echo $ChartTitle; ?>',
-          
+
           viewWindow: {
             min: [7, 30, 0],
             max: [17, 30, 0]

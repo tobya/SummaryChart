@@ -127,6 +127,7 @@ var data = [] ;
       <?php
       $j = 0;
       foreach ($DataRows as $key => $value) {
+       $key = str_replace("'","\'",$key);
         echo "      
         options['title'] = '$FeedbackField - $key';
         var chart$j = new google.visualization.ColumnChart(document.getElementById('chart_div$j'));

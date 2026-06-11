@@ -19,7 +19,8 @@ $FeedbackScores = getMultiSelectTotals($Data['Fields'], $HeaderList );
 
 // If not Grids found
 if ($FeedbackScores == []){
-  echo "Unable to  find any MultiSelect Results in Spreadsheet.  Try another spreadsheet.";
+  echo "Unable to download Results in Spreadsheet. Spreadsheet key may be incorrect.
+  <P> Alternatively, you may need to correctly set Sharing options on Sheet.";
   die();
 }
 
